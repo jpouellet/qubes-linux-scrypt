@@ -14,6 +14,12 @@ URL:		https://www.tarsnap.com/scrypt.html
 Source0:	https://www.tarsnap.com/scrypt/scrypt-%{version}.tgz
 Source1:	https://www.tarsnap.com/scrypt/scrypt-sigs-%{version}.asc
 
+# backports from master branch
+Patch0:		0001-scrypt-1-Document-passphrase-reading-behaviour.patch
+Patch1:		0002-Provide-P-option-to-read-password-from-stdin.patch
+Patch2:		0003-Reword-man-documentation-about-P.patch
+
+
 #BuildRequires:	
 #Requires:	
 
@@ -28,6 +34,9 @@ password using scrypt is stronger than a ten-character password using openssl.
 %prep
 %setup -q
 
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 %configure
