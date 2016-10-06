@@ -22,8 +22,7 @@ Patch3:		0001-scrypt-1-Document-passphrase-reading-behaviour.patch
 Patch4:		0002-Provide-P-option-to-read-password-from-stdin.patch
 Patch5:		0003-Reword-man-documentation-about-P.patch
 
-
-#BuildRequires:	
+BuildRequires:	openssl-devel
 #Requires:	
 
 %description
