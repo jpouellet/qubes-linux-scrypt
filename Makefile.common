@@ -38,7 +38,7 @@ endif
 endif
 ifndef SIG_FILE
 ifdef SIG_URL
-	SIG_FILE := $(basename $(notdir $(SIG_URL)))
+	SIG_FILE := $(notdir $(SIG_URL))
 endif
 endif
 
@@ -63,10 +63,13 @@ $(SIG_FILE): $(keyring-file)
 	@wget --no-use-server-timestamps -q -O $@$(UNTRUSTED_SUFF) $(SIG_URL)
 	@gpgv --keyring $(keyring) $@$(UNTRUSTED_SUFF) 2>/dev/null || \
         { echo "Wrong signature on $@$(UNTRUSTED_SUFF)!"; exit 1; }
-	@gpg -o $@ $@$(UNTRUSTED_SUFF) 2>/dev/null
-	
+	@mv -f $@$(UNTRUSTED_SUFF) $@
 
-$(SRC_FILE): $(SIG_FILE) $(keyring-file)
+# just drop signature, don't rely on gpg for its verification - use gpgv above for it
+$(basename $(SIG_FILE)): $(SIG_FILE)
+	@gpg --batch --keyring $(keyring) -o $@ $< 2>/dev/null
+
+$(SRC_FILE): $(basename $(SIG_FILE)) $(keyring-file)
 	@wget --no-use-server-timestamps -q -O $@ $(URL)
 	@sha256sum --quiet -c $< || rm -f $@
 
