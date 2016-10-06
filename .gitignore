@@ -1,2 +1,5 @@
 scrypt-*.tgz
 scrypt-sigs-*
+pkgs/
+rpm/
+srpm/
