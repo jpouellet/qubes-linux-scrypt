@@ -4,7 +4,7 @@
 %endif
 
 Name:		scrypt
-Version:	1.2.0
+Version:	1.2.1
 Release:	1%{?dist}
 Summary:	A simple password-based encryption utility
 
@@ -13,14 +13,6 @@ License:	BSD
 URL:		https://www.tarsnap.com/scrypt.html
 Source0:	https://www.tarsnap.com/scrypt/scrypt-%{version}.tgz
 Source1:	https://www.tarsnap.com/scrypt/scrypt-sigs-%{version}.asc
-
-# backports from master branch
-Patch0:		0001-Show-command-synopsis-in-usage.patch
-Patch1:		0001-Add-v-option-to-print-N-r-p-and-memory-cpu-limits.patch
-Patch2:		0001-Add-scrypt-version.patch
-Patch3:		0001-scrypt-1-Document-passphrase-reading-behaviour.patch
-Patch4:		0002-Provide-P-option-to-read-password-from-stdin.patch
-Patch5:		0003-Reword-man-documentation-about-P.patch
 
 BuildRequires:	openssl-devel
 #Requires:	
@@ -35,13 +27,6 @@ password using scrypt is stronger than a ten-character password using openssl.
 
 %prep
 %setup -q
-
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
 
 %build
 %configure
