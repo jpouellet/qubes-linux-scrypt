@@ -48,7 +48,7 @@ keyring := scrypt-trustedkeys.gpg
 keyring-file := $(if $(GNUPGHOME), $(GNUPGHOME)/, $(HOME)/.gnupg/)$(keyring)
 keyring-import := gpg -q --no-auto-check-trustdb --no-default-keyring --import
 
-$(keyring-file): $(wildcard *-key.asc)
+$(keyring-file): $(wildcard *-key-*.asc)
 	@rm -f $(keyring-file) && $(keyring-import) --keyring $(keyring) $^
 
 # get-sources already handle verification and remove the file(s) when it fails.
